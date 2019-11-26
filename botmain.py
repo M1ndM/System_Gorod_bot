@@ -27,15 +27,29 @@ def quest_answ():
         audio = r.listen(source)
         query = r.recognize_google(audio, language='ru-RU')
         print(query)
-        lastpokazania.append(query)
-    if query in opts["tbr"]:
-        with sr.Microphone(device_index=1) as source:
-            speak('скока, хау мач')
-            audio = r.listen(source)
-            query2 = r.recognize_google(audio, language='ru-RU')
-            print(query2)
-    else:
-        speak("ty sho peregrelsa")
+
+        if query in lastpokazania:
+            speak("ti sho peregrelsa")
+            speak('ya ponyal chto ti terorist, zhdi fsb')
+        else:
+            if query in opts["tbr"]:
+                speak('skoka, how much')
+                with sr.Microphone(device_index=1) as source:
+                    audio = r.listen(source)
+                    query = r.recognize_google(audio, language='ru-Ru')
+                    print(query)
+                    speak('dokazhi')
+                    audio = r.listen(source)
+                    query1 = r.recognize_google(audio, language='ru-RU')
+                    print(query1)
+                    if query1 == query:
+                        lastpokazania.append(query1)
+                        speak('ti proshol socialnii test, teper mi znaem ctho ti ne terorist')
+                    else:
+                        speak('bipolarochka, obleisa holodnoy vodoy')
+            else:
+                speak("sam peregrelsa")
+                speak('ya ponyal chto ti terorist, zhdi fsb')
 
 
 while True:
