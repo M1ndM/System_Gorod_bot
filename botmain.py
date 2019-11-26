@@ -44,7 +44,7 @@ def quest_answ():
                     print(query1)
                     if query1 == query:
                         lastpokazania.append(query1)
-                        speak('ti proshol socialnii test, teper mi znaem ctho ti ne terorist')
+                        speak('ti proshol socialnii test, teper mi znaem chto ti ne terorist')
                     else:
                         speak('bipolarochka, obleisa holodnoy vodoy')
             else:
