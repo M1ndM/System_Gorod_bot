@@ -17,7 +17,8 @@ def speak(what):
     speak_engine.say( what )
     speak_engine.runAndWait()
     speak_engine.stop()
-#функции
+
+
 def callback(recognizer, audio):
     try:
         voice = recognizer.recognize_google(audio, language="ru-RU").lower()
