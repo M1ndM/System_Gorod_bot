@@ -21,6 +21,9 @@ def speak(what):
     speak_engine.stop()
 
 
+speak('Vse yasno zashol terorist, chtobi ne popast v black spisok, proidy test')
+
+
 def quest_answ():
     if len(lastpokazania) <= 2:
         with sr.Microphone(device_index=1) as source:
@@ -28,8 +31,12 @@ def quest_answ():
             audio = r.listen(source)
             query = r.recognize_google(audio, language='ru-RU')
             print(query)
-            if query in lastpokazania:
-                speak("ti sho peregrelsa")
+            speak('gde, blinb')
+            audio = r.listen(source)
+            where = r.recognize_google(audio, language='ru-RU')
+            print(where)
+            if query + ' ' + where in lastpokazania:
+                speak("ti cho peregrelsa")
                 speak('ya ponyal chto ti terorist, zhdi fsb')
             else:
                 if query in opts["tbr"]:
@@ -43,15 +50,16 @@ def quest_answ():
                         query2 = r.recognize_google(audio, language='ru-RU')
                         print(query2)
                         if query1 == query2:
-                            lastpokazania.append(query)
-                            speak('ti proshol socialnii test, teper mi znaem chto ti ne terorist')
+                            lastpokazania.append(query + ' ' + where + ' ' + query2)
+                            speak('ti proshol socialnii test, teper mi znaem chto ti ne terorist, '
+                                  'maybe ti narkoman?')
                         else:
                             speak('bipolarochka, obleisa holodnoy vodoy')
                 else:
                     speak("ti chto, peregrelsa")
                     speak('ya ponyal chto ti terorist, zhdi fsb')
     else:
-        speak('ti proshol vse testi, i bily zaneseni v spisok neteroristov')
+        speak('ti proshol vse testi, i bil zanesen v spisok neteroristov')
 
 
 while True:
