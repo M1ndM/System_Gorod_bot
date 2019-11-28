@@ -22,34 +22,36 @@ def speak(what):
 
 
 def quest_answ():
-    with sr.Microphone(device_index=1) as source:
-        speak('skazhite pokazania')
-        audio = r.listen(source)
-        query = r.recognize_google(audio, language='ru-RU')
-        print(query)
-
-        if query in lastpokazania:
-            speak("ti sho peregrelsa")
-            speak('ya ponyal chto ti terorist, zhdi fsb')
-        else:
-            if query in opts["tbr"]:
-                speak('skoka, how much')
-                with sr.Microphone(device_index=1) as source:
-                    audio = r.listen(source)
-                    query = r.recognize_google(audio, language='ru-Ru')
-                    print(query)
-                    speak('dokazhi')
-                    audio = r.listen(source)
-                    query1 = r.recognize_google(audio, language='ru-RU')
-                    print(query1)
-                    if query1 == query:
-                        lastpokazania.append(query1)
-                        speak('ti proshol socialnii test, teper mi znaem chto ti ne terorist')
-                    else:
-                        speak('bipolarochka, obleisa holodnoy vodoy')
-            else:
-                speak("sam peregrelsa")
+    if len(lastpokazania) <= 2:
+        with sr.Microphone(device_index=1) as source:
+            speak('skazhite pokazania')
+            audio = r.listen(source)
+            query = r.recognize_google(audio, language='ru-RU')
+            print(query)
+            if query in lastpokazania:
+                speak("ti sho peregrelsa")
                 speak('ya ponyal chto ti terorist, zhdi fsb')
+            else:
+                if query in opts["tbr"]:
+                    speak('skoka, how much')
+                    with sr.Microphone(device_index=1) as source:
+                        audio = r.listen(source)
+                        query1 = r.recognize_google(audio, language='ru-Ru')
+                        print(query1)
+                        speak('dokazhi')
+                        audio = r.listen(source)
+                        query2 = r.recognize_google(audio, language='ru-RU')
+                        print(query2)
+                        if query1 == query2:
+                            lastpokazania.append(query)
+                            speak('ti proshol socialnii test, teper mi znaem chto ti ne terorist')
+                        else:
+                            speak('bipolarochka, obleisa holodnoy vodoy')
+                else:
+                    speak("ti chto, peregrelsa")
+                    speak('ya ponyal chto ti terorist, zhdi fsb')
+    else:
+        speak('ti proshol vse testi, i bily zaneseni v spisok neteroristov')
 
 
 while True:
