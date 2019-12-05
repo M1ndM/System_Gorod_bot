@@ -8,7 +8,10 @@ opts = {
     "pokazania": ('холодная вода на кухне', 'горячая вода на кухне',
                   'горячая вода в туалете', 'холодная вода в туалете', 'электричество')
 }
-list_pokazania = []
+list_pokazania = ['холодная вода на кухне', 'горячая вода на кухне',
+                  'горячая вода в туалете', 'холодная вода в туалете',]
+
+f = open('list_pokazania.txt', 'w')
 
 
 def speak(what):
@@ -20,23 +23,26 @@ def speak(what):
 
 def dialogue():
     speak('tell me pokazania')
-    f = open('list_pokazania.txt', 'w')
     with sr.Microphone(device_index=0) as source:
         audio = r.listen(source)
         pokaz = r.recognize_google(audio, language='ru')
-        if pokaz == opts["pokazania"]:
+        print(pokaz)
+        if pokaz in opts["pokazania"]:
             if pokaz in list_pokazania:
                 speak('you told it recently')
             else:
-                print(pokaz)
                 list_pokazania.append(pokaz)
-                for index in list_pokazania:
-                    f.write(index + '\n')
                 print(list_pokazania)
-                f.close()
         else:
             speak('we do not have this pokazanie')
 
 
 while True:
-    dialogue()
+    if len(list_pokazania) < 5:
+        dialogue()
+    else:
+        speak('you told me all pokazania, goodbye!')
+        for index in list_pokazania:
+            f.write(index + '\n')
+        f.close()
+        quit()
