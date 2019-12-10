@@ -1,5 +1,6 @@
-f = open("list_pokazania.txt", 'r')
-g = 'kdsvbub ibiuvbskfbuw 100'
+from fuzzywuzzy import fuzz
+from fuzzywuzzy import process
+g = ['dsvsfgvs', 'dfvsgbwevsdfws', 'ghfuhfkjouidshkjsd', 'Привет 9009']
 for i in g:
-    if i.isnumeric() == True:
-        print(i)
+    s = fuzz.ratio('Привет', i)
+    print(s)

@@ -8,7 +8,9 @@ opts = {
     "pokazania": ('холодная вода на кухне', 'горячая вода на кухне',
                   'горячая вода в туалете', 'холодная вода в туалете', 'электричество')
 }
-list_pokazania = []
+list_pokazania = ['холодная вода на кухне', 'горячая вода на кухне',
+                  'горячая вода в туалете', 'холодная вода в туалете', 'электричество']
+g = []
 
 f = open('list_pokazania.txt', 'w')
 
@@ -26,14 +28,11 @@ def dialogue():
         audio = r.listen(source)
         pokaz = r.recognize_google(audio, language='ru')
         print(pokaz)
-        if pokaz in opts["pokazania"]:
-            if pokaz in list_pokazania:
-                speak('you told it recently')
-            else:
-                list_pokazania.append(pokaz)
-                print(list_pokazania)
-        else:
-            speak('we do not have this pokazanie')
+        for i in opts["pokazania"]:
+            s = fuzz.ratio(i, pokaz)
+            if s >= 71:
+                print(i)
+                list_pokazania.append(i)
 
 
 while True:
