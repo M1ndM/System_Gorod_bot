@@ -8,8 +8,7 @@ opts = {
     "pokazania": ('холодная вода на кухне', 'горячая вода на кухне',
                   'горячая вода в туалете', 'холодная вода в туалете', 'электричество')
 }
-list_pokazania = ['холодная вода на кухне', 'горячая вода на кухне',
-                  'горячая вода в туалете', 'холодная вода в туалете']
+list_pokazania = []
 
 
 f = open('list_pokazania.txt', 'w')
@@ -24,7 +23,7 @@ def speak(what):
 
 def dialogue():
     speak('Здравствуйте, я чат-бот для сбора показаний ЖКХ')
-    speak('Скажите показания в виде' + ' "' + 'холодная вода на кухне, количество' + '"')
+    speak('Скажите показания')
     with sr.Microphone(device_index=0) as source:
         audio = r.listen(source)
         pokaz = r.recognize_google(audio, language='ru')
@@ -35,8 +34,7 @@ def dialogue():
                 speak('Вы уже говорили это')
         for i in opts["pokazania"]:
             s = fuzz.ratio(i, pokaz)
-            if s >= 71:
-                print(i)
+            if s >= 90:
                 list_pokazania.append(pokaz)
 
 
