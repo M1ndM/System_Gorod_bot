@@ -1,0 +1,41 @@
+
+
+<Root>:
+    orientation:'vertical'
+
+    canvas:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+    BoxLayout:
+        size_hint:(1, 0.07)
+        Button:
+            text:'history'
+            size_hint:(0.5, 1)
+        Button:
+            text:'FAQ'
+            size_hint:(0.5, 1)
+
+
+    FloatLayout:
+        padding:10
+        Button:
+            text:'M'
+            size_hint:(0.10, 0.08)
+            pos_hint:{'center_x': 0.5, 'center_y':0.55}
+
+
+
+        Label:
+            text:'Это ваши показания'
+            size_hint:1, 0.5
+            pos_hint:{'center_x': 0.5, 'center_y':0.5}
+            halign:'left'
+            font_size:15
+            color:0,0,1,1
+            text_size:self.size
+
+
+
