@@ -73,7 +73,7 @@ class MyApp(App):
 
 def show_popup():
     show = P()
-    popupWindow = Popup(title='Popup', content=show,
+    popupWindow = Popup(title='Popup_Reference', content=show,
                         size_hint=(None, None), size=(400, 400))
     popupWindow.open()
 
