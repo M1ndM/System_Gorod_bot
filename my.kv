@@ -1,4 +1,22 @@
 
+<P>:
+
+    Label:
+        text:'1.Показания следует передавать в следующей форме - тип показания + значение.'
+        pos_hint:{'x':0.1, 'top':1}
+        font_size:15
+        size_hint_y: None
+        text_size: self.width, None
+        height: self.texture_size[1]
+
+
+    Label:
+        text:'Пример: горячая вода 50 кубометров, электричество 60 и тд.'
+        pos_hint:{'x':0.1, 'y':0.7}
+        size_hint_y: None
+        text_size: self.width, None
+        height: self.texture_size[1]
+
 
 <Root>:
     orientation:'vertical'
@@ -12,14 +30,18 @@
     BoxLayout:
         size_hint:(1, 0.07)
         Button:
+
             text:'history'
             size_hint:(0.5, 1)
         Button:
             text:'FAQ'
             size_hint:(0.5, 1)
+            on_release:
+                root.btn()
 
 
     FloatLayout:
+
         padding:10
         Button:
             text:'M'
@@ -37,6 +59,7 @@
             font_size:15
             color:0,0,1,1
             text_size:self.size
+
 
 
 

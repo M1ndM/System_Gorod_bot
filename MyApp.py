@@ -3,9 +3,9 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.core.window import Window
 import speech_recognition as sr
 import pyttsx3
-import fuzzywuzzy as fuzz
-from kivy.uix.button import Button
-from kivy.uix.label import Label
+from fuzzywuzzy import fuzz
+from kivy.uix.popup import Popup
+from kivy.uix.floatlayout import FloatLayout
 
 
 Window.size = (430, 650)
@@ -13,6 +13,8 @@ Window.color = (1, 0, 0, 1)
 
 
 class Root(BoxLayout):
+    def btn(self):
+        show_popup()
     def priem(self):
         speak_engine = pyttsx3.init()
         r = sr.Recognizer()
@@ -47,6 +49,7 @@ class Root(BoxLayout):
                         print(i)
                         list_pokazania.append(pokaz)
 
+
         def writePokaz():
             for index in list_pokazania:
                 f.write(index + '\n')
@@ -61,10 +64,18 @@ class Root(BoxLayout):
                 quit()
 
 
+class P(FloatLayout):
+    pass
+
 class MyApp(App):
     def build(self):
         return Root()
 
+def show_popup():
+    show = P()
+    popupWindow = Popup(title='Popup', content=show,
+                        size_hint=(None, None), size=(400, 400))
+    popupWindow.open()
 
 if __name__ == '__main__':
     MyApp().run()
