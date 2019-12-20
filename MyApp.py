@@ -3,7 +3,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.core.window import Window
 import speech_recognition as sr
 import pyttsx3
-from fuzzywuzzy import fuzz
+from fuzzywuzzy import fuzz, process
 from kivy.uix.popup import Popup
 from kivy.uix.floatlayout import FloatLayout
 
@@ -11,10 +11,13 @@ from kivy.uix.floatlayout import FloatLayout
 Window.size = (430, 650)
 Window.color = (1, 0, 0, 1)
 
+from kivymd.theming import ThemeManager
 
 class Root(BoxLayout):
     def btn(self):
         show_popup()
+
+
     def priem(self):
         speak_engine = pyttsx3.init()
         r = sr.Recognizer()
@@ -32,12 +35,14 @@ class Root(BoxLayout):
             speak_engine.runAndWait()
             speak_engine.stop()
 
+
         def dialogue():
             speak('Здравствуйте, я чат-бот для сбора показаний ЖКХ')
             speak('Скажите показания в виде' + ' "' + 'холодная вода на кухне, количество' + '"')
             with sr.Microphone(device_index=0) as source:
                 audio = r.listen(source)
                 pokaz = r.recognize_google(audio, language='ru')
+                self.lbl.text = pokaz
                 print(pokaz)
                 for c in list_pokazania:
                     b = fuzz.ratio(c, pokaz)
@@ -48,6 +53,7 @@ class Root(BoxLayout):
                     if s >= 71:
                         print(i)
                         list_pokazania.append(pokaz)
+
 
 
         def writePokaz():
@@ -68,7 +74,10 @@ class P(FloatLayout):
     pass
 
 class MyApp(App):
+    theme_cls = ThemeManager()
+    title = 'DED MAXIM'
     def build(self):
+        self.theme_cls.theme_style = 'Light'
         return Root()
 
 def show_popup():

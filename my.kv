@@ -1,7 +1,12 @@
+#:import MDLabel kivymd.label.MDLabel
+#:import MDRaisedButton kivymd.button.MDRaisedButton
+
+
+
 
 <P>:
 
-    Label:
+    MDLabel:
         text:'1.Показания следует передавать в следующей форме - тип показания + значение.'
         pos_hint:{'x':0.1, 'top':1}
         font_size:15
@@ -10,7 +15,7 @@
         height: self.texture_size[1]
 
 
-    Label:
+    MDLabel:
         text:'Пример: горячая вода 50 кубометров, электричество 66 и тд.'
         pos_hint:{'x':0.1, 'y':0.7}
         size_hint_y: None
@@ -20,11 +25,8 @@
 
 <Root>:
     orientation:'vertical'
+    lbl:label
 
-    canvas:
-        Rectangle:
-            pos: self.pos
-            size: self.size
 
 
     BoxLayout:
@@ -43,15 +45,17 @@
     FloatLayout:
 
         padding:10
-        Button:
+        MDRaisedButton:
             text:'M'
             size_hint:(0.10, 0.08)
             pos_hint:{'center_x': 0.5, 'center_y':0.55}
+            background_color:196, 134, 20, 1
             on_press:
                 root.priem()
 
 
-        Label:
+        MDLabel:
+            id:label
             text:'That yours pokazania'
             size_hint:1, 0.5
             pos_hint:{'center_x': 0.5, 'center_y':0.5}
