@@ -1,69 +1,59 @@
-#:import MDLabel kivymd.label.MDLabel
-#:import MDRaisedButton kivymd.button.MDRaisedButton
-
-
-
-
-<P>:
-
-    MDLabel:
-        text:'1.Показания следует передавать в следующей форме - тип показания + значение.'
-        pos_hint:{'x':0.1, 'top':1}
-        font_size:15
-        size_hint_y: None
-        text_size: self.width, None
-        height: self.texture_size[1]
-
-
-    MDLabel:
-        text:'Пример: горячая вода 50 кубометров, электричество 66 и тд.'
-        pos_hint:{'x':0.1, 'y':0.7}
-        size_hint_y: None
-        text_size: self.width, None
-        height: self.texture_size[1]
-
-
 <Root>:
     orientation:'vertical'
-    lbl:label
+    NavigationLayout:
+        id:nav_layout
+        MDNavigationDrawer:
+            NavigationDrawerIconButton:
+                text:'main_screen'
+                on_release:
+                    screen_manager.current = 'main_screen'
+            NavigationDrawerIconButton:
+                text:'history_screen'
+                on_release:
+                    screen_manager.current = 'history_screen'
+            NavigationDrawerIconButton:
+                text:'Help'
+                on_release:
+                    screen_manager.current = 'help'
+        BoxLayout:
+            orientation:'vertical'
+            MDToolbar:
+                title:'ded maksim'
+                md_bg_color:app.theme_cls.primary_color
+                left_action_items:[['menu', lambda x: nav_layout.toggle_nav_drawer() ]]
+
+            ScreenManager:
+                id: screen_manager
+                Screen:
+                    name:'main_screen'
+                    FloatLayout:
+                        padding:10
+                        MDRaisedButton:
+                            text:'M'
+                            size_hint:(0.10, 0.08)
+                            pos_hint:{'center_x': 0.5, 'center_y':0.55}
+                            background_color:196, 134, 20, 1
+                            on_press:
+                                root.priem()
 
 
+                        MDLabel:
+                            text:'That yours pokazania'
+                            size_hint:1, 0.5
+                            pos_hint:{'center_x': 0.5, 'center_y':0.5}
+                            halign:'left'
+                            font_size:15
+                            color:0,0,1,1
+                            text_size:self.size
 
-    BoxLayout:
-        size_hint:(1, 0.07)
-        Button:
+                Screen:
+                    name:'history_screen'
+                    MDLabel:
+                        text:'History'
 
-            text:'history'
-            size_hint:(0.5, 1)
-        Button:
-            text:'FAQ'
-            size_hint:(0.5, 1)
-            on_release:
-                root.btn()
-
-
-    FloatLayout:
-
-        padding:10
-        MDRaisedButton:
-            text:'M'
-            size_hint:(0.10, 0.08)
-            pos_hint:{'center_x': 0.5, 'center_y':0.55}
-            background_color:196, 134, 20, 1
-            on_press:
-                root.priem()
-
-
-        MDLabel:
-            id:label
-            text:'That yours pokazania'
-            size_hint:1, 0.5
-            pos_hint:{'center_x': 0.5, 'center_y':0.5}
-            halign:'left'
-            font_size:15
-            color:0,0,1,1
-            text_size:self.size
-
-
+                Screen:
+                    name:'help'
+                    MDLabel:
+                        text:'Показания следует передавать в виде:'
 
 
