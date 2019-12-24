@@ -10,12 +10,16 @@ from kivy.lang import Builder
 from kivy.factory import Factory
 
 
-
 Window.size = (430, 650)
 Window.color = (1, 0, 0, 1)
 
 
 class Root(BoxLayout):
+    def history(self):
+        g = open('list_pokazania.txt', 'r')
+        n = g.read()
+        g.close()
+
     def priem(self):
         speak_engine = pyttsx3.init()
         r = sr.Recognizer()
@@ -63,15 +67,16 @@ class Root(BoxLayout):
                 writePokaz()
                 quit()
 
+
 class MyApp(MDApp):
     def __init__(self, **kwargs):
         self.title = "Ded Maksim"
         self.theme_cls = ThemeManager()
         self.theme_cls.primary_palette = 'Orange'
         super().__init__(**kwargs)
+
     def build(self):
         return Root()
-
 
 
 if __name__ == '__main__':

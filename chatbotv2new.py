@@ -22,7 +22,7 @@ def speak(what):
 
 
 def dialogue():
-    speak('Здравствуйте, я чат-бот для сбора показаний ЖКХ')
+
     speak('Скажите показания')
     with sr.Microphone(device_index=0) as source:
         audio = r.listen(source)
@@ -44,6 +44,7 @@ def writePokaz():
     f.close()
 
 
+speak('Здравствуйте, я чат-бот для сбора показаний ЖКХ')
 while True:
     if len(list_pokazania) < 5:
         dialogue()

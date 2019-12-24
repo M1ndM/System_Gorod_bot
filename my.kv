@@ -5,29 +5,34 @@
         id:nav_layout
         MDNavigationDrawer:
             NavigationDrawerIconButton:
-                text:'main_screen'
+                text:'Сдать показания'
                 on_release:
-                    screen_manager.current = 'main_screen'
+                    screen_manager.current = main.name
             NavigationDrawerIconButton:
-                text:'history_screen'
+                text:'История показаний'
                 on_release:
-                    screen_manager.current = 'history_screen'
+                    screen_manager.current = history.name
             NavigationDrawerIconButton:
-                text:'Help'
+                text:'Помощь'
                 on_release:
-                    screen_manager.current = 'help'
+                    screen_manager.current = help.name
+            NavigationDrawerIconButton:
+                text:'Реклама'
+                on_release:
+                    screen_manager.current = pokazania.name
         BoxLayout:
             orientation:'vertical'
             MDToolbar:
-                title:'ded maksim'
+                title:'Дедушка Максимильян'
                 md_bg_color:app.theme_cls.primary_color
                 left_action_items:[['menu', lambda x: nav_layout.toggle_nav_drawer() ]]
 
             ScreenManager:
                 id: screen_manager
                 Screen:
+                    id: main
                     padding:10
-                    name:'main_screen'
+                    name:'Сдать показания Максиму'
                     FloatLayout:
 
                         MDRaisedButton:
@@ -41,7 +46,7 @@
 
                         MDLabel:
                             id:lbl
-                            text:'That yours pokazania'
+                            text:'Это ваши показания'
                             size_hint:1, 0.5
                             pos_hint:{'center_x': 0.5, 'center_y':0.5}
                             halign:'left'
@@ -50,7 +55,8 @@
                             text_size:self.size
 
                 Screen:
-                    name:'history_screen'
+                    id: history
+                    name:'История показаний'
                     BoxLayout:
                         orientation:'vertical'
                         MDLabel:
@@ -61,14 +67,23 @@
                             text_size:self.size
 
                 Screen:
-                    name:'help'
+                    id: help
+                    name:'Помощь'
                     BoxLayout:
                         orientation:'vertical'
                         MDLabel:
-                            text:'Показания следует передавать в виде:  тип показания + количество'
+                            text:'Нажмите на кнопку  для того, чтобы начать разговор с Максимом' + '\n' + 'Показания следует передавать в виде:  тип показания + количество'
                             font_size:16
                             halign:'left'
                             valign:'top'
                             text_size:self.size
 
-
+                Screen:
+                    id: pokazania
+                    name:'Показания, которые мне нужно сдавать'
+                    BoxLayout:
+                        orientation:'vertical'
+                        FloatLayout:
+                            CheckBox:
+                                active:True
+                                size_hint:0.1, 0.1
