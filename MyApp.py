@@ -64,6 +64,11 @@ class Root(BoxLayout):
                 quit()
 
 class MyApp(MDApp):
+    def __init__(self, **kwargs):
+        self.title = "Ded Maksim"
+        self.theme_cls = ThemeManager()
+        self.theme_cls.primary_palette = 'Orange'
+        super().__init__(**kwargs)
     def build(self):
         return Root()
 

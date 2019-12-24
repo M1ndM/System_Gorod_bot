@@ -1,5 +1,6 @@
 <Root>:
     orientation:'vertical'
+    label:lbl
     NavigationLayout:
         id:nav_layout
         MDNavigationDrawer:
@@ -25,9 +26,10 @@
             ScreenManager:
                 id: screen_manager
                 Screen:
+                    padding:10
                     name:'main_screen'
                     FloatLayout:
-                        padding:10
+
                         MDRaisedButton:
                             text:'M'
                             size_hint:(0.10, 0.08)
@@ -38,22 +40,35 @@
 
 
                         MDLabel:
+                            id:lbl
                             text:'That yours pokazania'
                             size_hint:1, 0.5
                             pos_hint:{'center_x': 0.5, 'center_y':0.5}
                             halign:'left'
                             font_size:15
-                            color:0,0,1,1
+                            color:0,0,0,1
                             text_size:self.size
 
                 Screen:
                     name:'history_screen'
-                    MDLabel:
-                        text:'History'
+                    BoxLayout:
+                        orientation:'vertical'
+                        MDLabel:
+                            text:'Здесь будет иcтория ваших показаний'
+                            font_size:16
+                            halign:'left'
+                            valign:'top'
+                            text_size:self.size
 
                 Screen:
                     name:'help'
-                    MDLabel:
-                        text:'Показания следует передавать в виде:'
+                    BoxLayout:
+                        orientation:'vertical'
+                        MDLabel:
+                            text:'Показания следует передавать в виде:  тип показания + количество'
+                            font_size:16
+                            halign:'left'
+                            valign:'top'
+                            text_size:self.size
 
 
